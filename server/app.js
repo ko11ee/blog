@@ -9,12 +9,10 @@ const commentRoutes = require('./routes/comment.routes')
 const keys = require('./keys')
 const app = express()
 
-try {
-  mongoose.connect( keys.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, () =>
-  console.log("connected"))
-} catch (error) { 
-  console.log("could not connect")
-}
+mongoose.connect(keys.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then(() => console.log('MongoDB connected...'))
+  .catch(error => console.error(error))
+
 
 app.use(passport.initialize())
 passport.use(passportStrategy)
